@@ -4,9 +4,22 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 @Component({
   selector: 'app-department-details',
   template: `
-      You selected department with id {{departmentid}} <br>
+
+      You selected department with id {{departmentid}} 
+
+      <p>
+      <button (click)="showOverview()">Overview </button>
+      <button (click)="showContact()">Contact </button>
+      </p>
+
+      <router-outlet></router-outlet>
+
+      <p>
       <button (click)="goPrevious()">Previous</button>
       <button (click)="goNext()">Next</button>
+      </p>
+
+      <button (click)="goBack()"> Back</button>
   `,
   styleUrls: ['./department-details.component.css']
 })
@@ -28,12 +41,27 @@ export class DepartmentDetailsComponent implements OnInit {
   goPrevious(){
     let previousid = this.departmentid - 1;
    // this.departmentid = previousid;
-    this.router.navigate(['/departments',previousid]);
+    //this.router.navigate(['/departments',previousid]);
+   this.router.navigate(['../',previousid],{relativeTo: this.route});
   }
 
   goNext(){
     let nextid = this.departmentid + 1;
     //this.departmentid =  nextid;
-    this.router.navigate(['/departments',nextid]);
+   // this.router.navigate(['/departments',nextid]);
+    this.router.navigate(['../',nextid],{relativeTo: this.route});
+  }
+
+  goBack(){
+   // this.router.navigate(['/departments', {id:this.departmentid, test:'testparam'}]);
+    this.router.navigate(['../'],{relativeTo : this.route});
+  }
+
+  showOverview(){
+    this.router.navigate(['overview'],{relativeTo : this.route});
+  }
+
+  showContact(){
+    this.router.navigate(['contact'],{relativeTo : this.route});
   }
 }
