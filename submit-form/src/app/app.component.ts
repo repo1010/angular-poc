@@ -13,6 +13,7 @@ export class AppComponent {
   hasTopicError= false;
   submitted = false;
   userModel =  new User('Vishal','abc@gmail.com','8372822389','default','morning',true);
+  errorMessage: '';
 
   constructor(private service : RegistrationService){
 
@@ -29,7 +30,7 @@ export class AppComponent {
   onSubmit(value){
       console.log(value);
       this.service.submitForm(value).subscribe(data => console.log('success', data),
-      error => console.log('error ', error));
+      error => this.errorMessage = error.statusText);
       this.submitted = true;
   }
 }

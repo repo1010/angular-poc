@@ -3,6 +3,10 @@
   <h1 style="text-align:center">
     Welcome to {{ title }}!
   </h1>
+<div class="alert alert-danger" *ngIf="errorMessage">
+  {{errorMessage}}
+</div>
+
 <div *ngIf="!submitted"> 
  User Form: {{userForm.value | json}}
 <p>
